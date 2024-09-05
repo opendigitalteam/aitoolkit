@@ -10,7 +10,7 @@ import { Upload } from "@aws-sdk/lib-storage";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import assert from "assert";
 import { CacheData } from "../domains/CacheData";
-import { CacheRecordKey } from "../domains/CacheRecord";
+import { CacheRecord, CacheRecordKey } from "../domains/CacheRecord";
 import CacheDataGateway from "./CacheDataGateway";
 
 export default class CacheDataS3Gateway implements CacheDataGateway {
@@ -43,7 +43,8 @@ export default class CacheDataS3Gateway implements CacheDataGateway {
         Bucket: this.options.bucketName,
         Key: this.key(keyPrefix, key),
         Body: JSON.stringify(
-          CacheData.parse({
+          CacheRecord.parse({
+            keyPrefix,
             key,
             data,
           })
@@ -83,7 +84,7 @@ export default class CacheDataS3Gateway implements CacheDataGateway {
   async getCacheDataByPrefixedKey(
     keyPrefix: string,
     key: string
-  ): Promise<CacheData | undefined> {
+  ): Promise<CacheRecord | undefined> {
     if (!(await this.checkIfCacheDataExists(keyPrefix, key))) {
       return;
     }
@@ -97,7 +98,7 @@ export default class CacheDataS3Gateway implements CacheDataGateway {
 
     if (body) {
       try {
-        return CacheData.parse(JSON.parse(await body.transformToString()));
+        return CacheRecord.parse(JSON.parse(await body.transformToString()));
       } catch (e) {
         console.error(e);
         throw new Error("Could not parse file as JSON");

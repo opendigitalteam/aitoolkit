@@ -1,5 +1,5 @@
 import { CacheData } from "../domains/CacheData";
-import { CacheRecordKey } from "../domains/CacheRecord";
+import { CacheRecord, CacheRecordKey } from "../domains/CacheRecord";
 
 export default interface CacheDataGateway {
   saveCacheData(keyPrefix: string, key: string, data: CacheData): Promise<void>;
@@ -7,7 +7,7 @@ export default interface CacheDataGateway {
   getCacheDataByPrefixedKey(
     keyPrefix: string,
     key: string
-  ): Promise<CacheData | undefined>;
+  ): Promise<CacheRecord | undefined>;
 
   getCacheDataKeysByPrefix(keyPrefix: string): Promise<CacheRecordKey[]>;
 

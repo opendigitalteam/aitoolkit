@@ -10,11 +10,11 @@ type DoOnceRequest = {
   validateBeforeSave?: (data: CacheData) => boolean;
 };
 
-type DoOnceResponse<T extends CacheData> =
+type DoOnceResponse =
   | {
       ok: true;
       alreadyExisted?: boolean;
-      data: T;
+      data: CacheData;
     }
   | {
       ok: false;
@@ -22,22 +22,22 @@ type DoOnceResponse<T extends CacheData> =
       data?: undefined;
     };
 
-export default async function DoOnce<T extends CacheData>(
+export default async function DoOnce(
   {
     gateway,
     keyPrefix = defaultKeyPrefix,
     key,
     validateBeforeSave,
   }: DoOnceRequest,
-  fn: () => Promise<T>
-): Promise<DoOnceResponse<T>> {
-  const cacheData = await gateway.getCacheDataByPrefixedKey(keyPrefix, key);
+  fn: () => Promise<CacheData>
+): Promise<DoOnceResponse> {
+  const cacheRecord = await gateway.getCacheDataByPrefixedKey(keyPrefix, key);
 
-  if (cacheData) {
+  if (cacheRecord) {
     return {
       ok: true,
       alreadyExisted: true,
-      data: cacheData.data,
+      data: CacheData.parse(cacheRecord.data),
     };
   }
 
