@@ -40,17 +40,21 @@ jobs:
           - packages/cache
           - packages/complete
           - packages/search
-    if:
-      ${{ needs.release-please.outputs[format('publish-{0}', matrix.package)] }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        if:
+          ${{ needs.release-please.outputs[format('publish-{0}',
+          matrix.package)] }}
 
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
           node-version: 20
           registry-url: "https://registry.npmjs.org"
+        if:
+          ${{ needs.release-please.outputs[format('publish-{0}',
+          matrix.package)] }}
 
       - name: Publish ${{ matrix.package }}
         env:
@@ -60,3 +64,6 @@ jobs:
           npm install
           npm prepublish
           npm publish
+        if:
+          ${{ needs.release-please.outputs[format('publish-{0}',
+          matrix.package)] }}
