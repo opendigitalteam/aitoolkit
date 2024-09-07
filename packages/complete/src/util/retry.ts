@@ -1,7 +1,7 @@
 import sleep from "./sleep";
 
-export async function retry(
-  fn: Function,
+export async function retry<T>(
+  fn: (attempt: number) => Promise<T>,
   {
     retries,
     delay,
@@ -12,12 +12,12 @@ export async function retry(
     backOff: false,
   },
   attempt?: number,
-): Promise<any> {
+): Promise<T> {
   attempt = attempt || 0;
 
   try {
     return await fn(++attempt);
-  } catch (err: any) {
+  } catch (err) {
     if (attempt < retries) {
       console.debug("retry", { retries, delay, backOff, attempt }, err);
       if (delay) {

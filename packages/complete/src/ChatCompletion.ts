@@ -23,9 +23,9 @@ type ChatCompletionUserTextMessage = {
 export type ChatCompletionFormat = "json" | "text";
 export type ChatCompletionTradeoff = "speed" | "quality";
 export type ChatCompletionTemperature = "cold" | "cool" | "standard" | "hot";
-export type ChatCompletionValidator<R extends object> = (input: string) => R;
+export type ChatCompletionValidator<R> = (input: string) => R;
 
-export type ChatCompletionPrompt<R extends object> = {
+export type ChatCompletionPrompt<R> = {
   messages: ChatCompletionMessage[];
   responseValidator: ChatCompletionValidator<R>;
   format: ChatCompletionFormat;
