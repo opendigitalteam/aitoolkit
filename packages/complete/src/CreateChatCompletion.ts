@@ -7,23 +7,18 @@ import {
 } from "./ChatCompletion";
 import { ChatCompletionGateway } from "./ChatCompletionGateway";
 import { ChatCompletionResponseCache } from "./ChatCompletionPromptCache";
-import CreateChatCompletionWithCache from "./CreateChatCompletionWithCache";
 import { retry } from "./util/retry";
 
-export type CreateChatCompleteRequest<R extends object> = {
+export type CreateChatCompleteRequest<R> = {
   gateway: ChatCompletionGateway;
   messages: ChatCompletionMessage[];
   responseValidator?: ChatCompletionValidator<R>;
   format?: ChatCompletionFormat;
   tradeoff?: ChatCompletionTradeoff;
   temperature?: ChatCompletionTemperature;
-} & (
-  | {}
-  | {
-      cache: ChatCompletionResponseCache<R>;
-      forceFreshRequest?: boolean;
-    }
-);
+  cache?: ChatCompletionResponseCache<R>;
+  forceFreshRequest?: boolean;
+};
 
 export type CreateChatCompleteResponse<R> = {
   ok: true;
@@ -32,12 +27,10 @@ export type CreateChatCompleteResponse<R> = {
   raw: string;
 };
 
-export async function CreateChatCompletion<
-  R extends object = Record<string, any>,
->(
+export async function CreateChatCompletion<R>(
   request: CreateChatCompleteRequest<R>,
 ): Promise<CreateChatCompleteResponse<R>> {
-  if ("cache" in request) return await CreateChatCompletionWithCache(request);
+  // if ("cache" in request) return await CreateChatCompletionWithCache(request);
   console.debug("complete/request", request);
 
   try {
@@ -54,7 +47,9 @@ export async function CreateChatCompletion<
             request.format || "json",
             raw,
             request.responseValidator ||
-              defaultChatCompletionValidator(request.format),
+              (defaultChatCompletionValidator(
+                request.format,
+              ) as ChatCompletionValidator<R>),
           );
           console.debug("complete/response:", content);
           return { ok: true, content, raw };
@@ -64,7 +59,7 @@ export async function CreateChatCompletion<
           });
           throw new Error("No response from chat completion");
         }
-      } catch (err: any) {
+      } catch (err) {
         console.debug(
           "complete/error: Error occurred calling chat completion",
           err,
@@ -75,18 +70,28 @@ export async function CreateChatCompletion<
         throw err;
       }
     });
-  } catch (err: any) {
+  } catch (err) {
     console.error(
       "complete/error: Error occurred calling chat completion, giving up",
       err,
-      err.response?.data,
+      // err.response?.data,
     );
     throw err;
   }
 }
 
-function defaultChatCompletionValidator(format: ChatCompletionFormat = "text") {
-  return function (content: string): Record<string, any> {
+type JSONResponseValidator = {
+  json: any;
+};
+
+type TextResponseValidator = {
+  text: string;
+};
+
+function defaultChatCompletionValidator(
+  format: ChatCompletionFormat = "text",
+): ChatCompletionValidator<JSONResponseValidator | TextResponseValidator> {
+  return function (content: string) {
     // Return should be something more like: { json: any } | { text: string }
     switch (format) {
       case "json":
@@ -98,7 +103,7 @@ function defaultChatCompletionValidator(format: ChatCompletionFormat = "text") {
   };
 }
 
-function parseResponse<R extends object>(
+function parseResponse<R>(
   format: ChatCompletionFormat,
   content: string,
   responseValidator: ChatCompletionValidator<R>,
@@ -112,7 +117,7 @@ function parseResponse<R extends object>(
   }
 }
 
-function safeParseUnstructuredJSON(content: string): any {
+function safeParseUnstructuredJSON(content: string) {
   const jsonContent = content.slice(
     content.indexOf("{"),
     content.lastIndexOf("}") + 1,
