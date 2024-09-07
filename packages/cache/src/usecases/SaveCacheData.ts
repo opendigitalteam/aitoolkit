@@ -13,6 +13,6 @@ export default async function SaveCacheData(request: SaveCacheDataRequest) {
   await request.gateway.saveCacheData(
     request.keyPrefix || defaultKeyPrefix,
     request.key,
-    request.data
+    request.data,
   );
 }

@@ -31,7 +31,7 @@ export class OpenAIChatCompletionGateway implements ChatCompletionGateway {
 
   async create(
     messages: ChatCompletionMessage[],
-    options: ChatCompletionGatewayCreateOptions
+    options: ChatCompletionGatewayCreateOptions,
   ): Promise<string | undefined> {
     const model = mapTradeoffToOpenAIModel(options.tradeoff);
     const completion = await this.client.chat.completions.create(
@@ -40,7 +40,7 @@ export class OpenAIChatCompletionGateway implements ChatCompletionGateway {
         messages,
         temperature: mapTempToOpenAI(options.temperature),
         response_format: mapFormatToOpenAI(options.format),
-      }
+      },
       // {
       //   maxRetries: this.options.maxRetries,
       //   timeout: this.options.timeout,
@@ -52,7 +52,7 @@ export class OpenAIChatCompletionGateway implements ChatCompletionGateway {
 }
 
 function mapTradeoffToOpenAIModel(
-  tradeoff: undefined | ChatCompletionTradeoff
+  tradeoff: undefined | ChatCompletionTradeoff,
 ): OpenAIModel {
   switch (tradeoff) {
     case "quality":

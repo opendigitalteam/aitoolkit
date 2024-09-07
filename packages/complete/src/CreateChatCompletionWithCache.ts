@@ -12,9 +12,9 @@ export type CreateChatCompleteWithCacheRequest<R extends object> =
   };
 
 export default async function CreateChatCompletionWithCache<
-  R extends object = Record<string, any>
+  R extends object = Record<string, any>,
 >(
-  request: CreateChatCompleteWithCacheRequest<R>
+  request: CreateChatCompleteWithCacheRequest<R>,
 ): Promise<CreateChatCompleteResponse<R>> {
   if (!request.forceFreshRequest) {
     console.debug("complete-with-cache: getting from cache", request);

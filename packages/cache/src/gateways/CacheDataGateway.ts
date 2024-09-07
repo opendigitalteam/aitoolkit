@@ -6,21 +6,21 @@ export default interface CacheDataGateway {
 
   getCacheDataByPrefixedKey(
     keyPrefix: string,
-    key: string
+    key: string,
   ): Promise<CacheRecord | undefined>;
 
   getCacheDataKeysByPrefix(keyPrefix: string): Promise<CacheRecordKey[]>;
 
   getCacheDataKeysByPrefixedKey(
     keyPrefix: string,
-    key: string
+    key: string,
   ): Promise<CacheRecordKey[]>;
 
   getCacheDataDownloadUrl(keyPrefix: string, key: string): Promise<string>;
   getCacheDataDownloadUrl(cacheRecordKey: CacheRecordKey): Promise<string>;
   getCacheDataDownloadUrl(
     keyPrefixOrCacheRecordKey: string | CacheRecordKey,
-    key?: string
+    key?: string,
   ): Promise<string>;
 
   deleteCacheData(keyPrefix: string, key: string): Promise<void>;

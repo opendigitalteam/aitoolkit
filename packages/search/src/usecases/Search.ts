@@ -27,11 +27,11 @@ type SearchResponse =
     };
 
 export default async function Search(
-  request: SearchRequest
+  request: SearchRequest,
 ): Promise<SearchResponse> {
   try {
     const { results, totalResults, rawResults } = await request.gateway.search(
-      request.query
+      request.query,
     );
     return {
       ok: true,

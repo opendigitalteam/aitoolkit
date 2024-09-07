@@ -33,9 +33,9 @@ export type CreateChatCompleteResponse<R> = {
 };
 
 export async function CreateChatCompletion<
-  R extends object = Record<string, any>
+  R extends object = Record<string, any>,
 >(
-  request: CreateChatCompleteRequest<R>
+  request: CreateChatCompleteRequest<R>,
 ): Promise<CreateChatCompleteResponse<R>> {
   if ("cache" in request) return await CreateChatCompletionWithCache(request);
   console.debug("complete/request", request);
@@ -54,7 +54,7 @@ export async function CreateChatCompletion<
             request.format || "json",
             raw,
             request.responseValidator ||
-              defaultChatCompletionValidator(request.format)
+              defaultChatCompletionValidator(request.format),
           );
           console.debug("complete/response:", content);
           return { ok: true, content, raw };
@@ -70,7 +70,7 @@ export async function CreateChatCompletion<
           err,
           {
             attemptNumber,
-          }
+          },
         );
         throw err;
       }
@@ -79,7 +79,7 @@ export async function CreateChatCompletion<
     console.error(
       "complete/error: Error occurred calling chat completion, giving up",
       err,
-      err.response?.data
+      err.response?.data,
     );
     throw err;
   }
@@ -101,7 +101,7 @@ function defaultChatCompletionValidator(format: ChatCompletionFormat = "text") {
 function parseResponse<R extends object>(
   format: ChatCompletionFormat,
   content: string,
-  responseValidator: ChatCompletionValidator<R>
+  responseValidator: ChatCompletionValidator<R>,
 ): R {
   switch (format) {
     case "text":
@@ -115,7 +115,7 @@ function parseResponse<R extends object>(
 function safeParseUnstructuredJSON(content: string): any {
   const jsonContent = content.slice(
     content.indexOf("{"),
-    content.lastIndexOf("}") + 1
+    content.lastIndexOf("}") + 1,
   );
   const parsedContent = JSON.parse(jsonContent);
   return parsedContent;
