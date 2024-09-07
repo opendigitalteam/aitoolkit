@@ -1,4 +1,4 @@
-all: clear-dist build-dist publish-all
+all: install clear-dist build-dist publish-all
 
 install:
 	cd packages/cache; npm install
