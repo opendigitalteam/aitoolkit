@@ -29,12 +29,30 @@ jobs:
           node-version: 20
           registry-url: "https://registry.npmjs.org"
 
-      - name: Build Packages
+      - name: Build packages
         if: ${{ steps.release.outputs.releases_created }}
         run: make
 
-      - name: Publish to NPM
-        if: ${{ steps.release.outputs.releases_created }}
+      - name: Publish @aitoolkit/cache
+        if: ${{ steps.release.outputs['packages/cache--releases_created'] }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish
+        run: |
+          cd packages/cache
+          npm publish
+
+      - name: Publish @aitoolkit/complete
+        if: ${{ steps.release.outputs['packages/complete--releases_created'] }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          cd packages/complete
+          npm publish
+
+      - name: Publish @aitoolkit/search
+        if: ${{ steps.release.outputs['packages/search--releases_created'] }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          cd packages/search
+          npm publish
