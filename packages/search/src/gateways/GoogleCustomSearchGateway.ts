@@ -20,7 +20,7 @@ export default class GoogleCustomSearchGateway {
       console.error(
         "Error searching with Google",
         response.status,
-        JSON.stringify(data, null, 2)
+        JSON.stringify(data, null, 2),
       );
       return {
         results: [],
@@ -31,7 +31,7 @@ export default class GoogleCustomSearchGateway {
     console.debug(
       "Searching with Google",
       query,
-      data.searchInformation.totalResults
+      data.searchInformation.totalResults,
     );
 
     if (data.items && data.items.length > 0) {

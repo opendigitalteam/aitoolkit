@@ -8,10 +8,10 @@ type FetchCacheDataRequest = {
 };
 
 export default async function FetchCacheData(
-  request: FetchCacheDataRequest
+  request: FetchCacheDataRequest,
 ): Promise<CacheRecord | undefined> {
   return await request.gateway.getCacheDataByPrefixedKey(
     request.keyPrefix || defaultKeyPrefix,
-    request.key
+    request.key,
   );
 }

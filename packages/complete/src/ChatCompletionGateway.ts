@@ -14,6 +14,6 @@ export type ChatCompletionGatewayCreateOptions = {
 export interface ChatCompletionGateway {
   create(
     messages: ChatCompletionMessage[],
-    options: ChatCompletionGatewayCreateOptions
+    options: ChatCompletionGatewayCreateOptions,
   ): Promise<string | undefined>;
 }

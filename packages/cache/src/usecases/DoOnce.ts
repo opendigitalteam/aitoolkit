@@ -31,7 +31,7 @@ export default async function DoOnce(
     validateBeforeSave,
     overwrite = false,
   }: DoOnceRequest,
-  fn: () => Promise<CacheData>
+  fn: () => Promise<CacheData>,
 ): Promise<DoOnceResponse> {
   if (!overwrite) {
     const cacheRecord = await gateway.getCacheDataByPrefixedKey(keyPrefix, key);

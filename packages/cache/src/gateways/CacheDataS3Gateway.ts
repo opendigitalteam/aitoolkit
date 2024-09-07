@@ -47,7 +47,7 @@ export default class CacheDataS3Gateway implements CacheDataGateway {
             keyPrefix,
             key,
             data,
-          })
+          }),
         ),
       },
     });
@@ -57,14 +57,14 @@ export default class CacheDataS3Gateway implements CacheDataGateway {
 
   private async checkIfCacheDataExists(
     keyPrefix: string,
-    key: string
+    key: string,
   ): Promise<boolean> {
     try {
       await this.client.send(
         new HeadObjectCommand({
           Bucket: this.options.bucketName,
           Key: this.key(keyPrefix, key),
-        })
+        }),
       );
       return true;
     } catch (err) {
@@ -83,7 +83,7 @@ export default class CacheDataS3Gateway implements CacheDataGateway {
 
   async getCacheDataByPrefixedKey(
     keyPrefix: string,
-    key: string
+    key: string,
   ): Promise<CacheRecord | undefined> {
     if (!(await this.checkIfCacheDataExists(keyPrefix, key))) {
       return;
@@ -93,7 +93,7 @@ export default class CacheDataS3Gateway implements CacheDataGateway {
       new GetObjectCommand({
         Bucket: this.options.bucketName,
         Key: this.key(keyPrefix, key),
-      })
+      }),
     );
 
     if (body) {
@@ -116,7 +116,7 @@ export default class CacheDataS3Gateway implements CacheDataGateway {
         Bucket: this.options.bucketName,
         Prefix: this.keyParts(...keyParts),
         MaxKeys: 10,
-      })
+      }),
     );
 
     if (!cacheDataSet) return [];
@@ -140,21 +140,21 @@ export default class CacheDataS3Gateway implements CacheDataGateway {
 
   async getCacheDataKeysByPrefixedKey(
     keyPrefix: string,
-    key: string
+    key: string,
   ): Promise<CacheRecordKey[]> {
     return this.getCacheDataKeysByParts(keyPrefix, key);
   }
 
   async getCacheDataDownloadUrl(
     keyPrefix: string,
-    key: string
+    key: string,
   ): Promise<string>;
   async getCacheDataDownloadUrl(
-    cacheRecordKey: CacheRecordKey
+    cacheRecordKey: CacheRecordKey,
   ): Promise<string>;
   async getCacheDataDownloadUrl(
     keyPrefixOrCacheRecordKey: string | CacheRecordKey,
-    key?: string
+    key?: string,
   ): Promise<string> {
     let keyPrefix: string;
 
@@ -192,7 +192,7 @@ export default class CacheDataS3Gateway implements CacheDataGateway {
       new DeleteObjectCommand({
         Bucket: this.options.bucketName,
         Key: this.key(keyPrefix, key),
-      })
+      }),
     );
   }
 
@@ -207,9 +207,9 @@ export default class CacheDataS3Gateway implements CacheDataGateway {
               Bucket: this.options.bucketName,
               CopySource: key,
               Key: key.replace(oldPrefix, newPrefix),
-            })
-          )
-        )
+            }),
+          ),
+        ),
       );
     });
 
@@ -220,9 +220,9 @@ export default class CacheDataS3Gateway implements CacheDataGateway {
             new DeleteObjectCommand({
               Bucket: this.options.bucketName,
               Key: key,
-            })
-          )
-        )
+            }),
+          ),
+        ),
       );
     });
   }
@@ -231,7 +231,7 @@ export default class CacheDataS3Gateway implements CacheDataGateway {
 async function serialBatchFn<T>(
   items: T[],
   batchSize: number,
-  fn: (batch: T[]) => Promise<any>
+  fn: (batch: T[]) => Promise<any>,
 ) {
   if (items.length === 0) return;
   for (let i = 0; i < items.length; i += batchSize) {

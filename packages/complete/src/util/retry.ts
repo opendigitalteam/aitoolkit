@@ -11,7 +11,7 @@ export async function retry(
     delay: 5000,
     backOff: false,
   },
-  attempt?: number
+  attempt?: number,
 ): Promise<any> {
   attempt = attempt || 0;
 
@@ -28,7 +28,7 @@ export async function retry(
       console.error(
         "retry (giving up)",
         { retries, delay, backOff, attempt },
-        err
+        err,
       );
       throw err;
     }
