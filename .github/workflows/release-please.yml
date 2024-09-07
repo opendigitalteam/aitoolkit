@@ -12,12 +12,6 @@ name: release-please
 jobs:
   release-please:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        package:
-          - packages/cache
-          - packages/complete
-          - packages/search
     steps:
       - uses: googleapis/release-please-action@v4
         id: release
