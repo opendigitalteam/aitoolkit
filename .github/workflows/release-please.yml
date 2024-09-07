@@ -49,6 +49,7 @@ jobs:
         run: |
           cd ${{ matrix.package }}
           npm install
-          npm prepublish
+          npm run lint
+          npm run prepublish
           npm publish
         if: ${{ needs.release-please.outputs[matrix.package] }}

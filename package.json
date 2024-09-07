@@ -16,6 +16,10 @@
     "prettier": "^3.3.3"
   },
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint": "npm run lint:ts && npm run lint:eslint && npm run lint:prettier",
+    "lint:ts": "npx tsc --noEmit",
+    "lint:eslint": "next lint --quiet --format stylish",
+    "lint:prettier": "prettier . --check"
   }
 }
