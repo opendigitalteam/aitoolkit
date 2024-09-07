@@ -8,6 +8,7 @@ type DoOnceRequest = {
   keyPrefix?: string;
   key: string;
   validateBeforeSave?: (data: CacheData) => boolean;
+  overwrite?: boolean;
 };
 
 type DoOnceResponse =
@@ -28,17 +29,20 @@ export default async function DoOnce(
     keyPrefix = defaultKeyPrefix,
     key,
     validateBeforeSave,
+    overwrite = false,
   }: DoOnceRequest,
   fn: () => Promise<CacheData>
 ): Promise<DoOnceResponse> {
-  const cacheRecord = await gateway.getCacheDataByPrefixedKey(keyPrefix, key);
+  if (!overwrite) {
+    const cacheRecord = await gateway.getCacheDataByPrefixedKey(keyPrefix, key);
 
-  if (cacheRecord) {
-    return {
-      ok: true,
-      alreadyExisted: true,
-      data: CacheData.parse(cacheRecord.data),
-    };
+    if (cacheRecord) {
+      return {
+        ok: true,
+        alreadyExisted: true,
+        data: CacheData.parse(cacheRecord.data),
+      };
+    }
   }
 
   try {
