@@ -5,21 +5,23 @@
     "packages/complete",
     "packages/search"
   ],
-  "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
-  },
-  "devDependencies": {
-    "eslint": "^9.10.0",
-    "eslint-config-prettier": "^9.1.0",
-    "husky": "^9.1.5",
-    "lint-staged": "^15.2.10",
-    "prettier": "^3.3.3"
-  },
   "scripts": {
     "prepare": "husky",
     "lint": "npm run lint:ts && npm run lint:eslint && npm run lint:prettier",
     "lint:ts": "npx tsc --noEmit",
     "lint:eslint": "next lint --quiet --format stylish",
     "lint:prettier": "prettier . --check"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.4.1",
+    "@commitlint/config-conventional": "^19.4.1",
+    "eslint": "^9.10.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.1.5",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3"
   }
 }
