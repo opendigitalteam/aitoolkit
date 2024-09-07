@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/opendigitalteam/aitoolkit/compare/cache-v1.4.0...cache-v1.5.0) (2024-09-07)
+
+
+### Miscellaneous Chores
+
+* release 1.5.0 ([17f65e0](https://github.com/opendigitalteam/aitoolkit/commit/17f65e0d557e83a628a80ec1a2ce64822d1d6d61))
+
 ## [1.4.0](https://github.com/opendigitalteam/aitoolkit/compare/cache-v1.3.1...cache-v1.4.0) (2024-09-07)
 
 
