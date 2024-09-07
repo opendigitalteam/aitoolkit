@@ -1,4 +1,4 @@
-all: install clear-dist build-dist publish-all
+all: install clear-dist build-dist
 
 install:
 	cd packages/cache; npm install
@@ -21,9 +21,4 @@ clear-dist:
 
 build-dist: packages/cache/dist packages/complete/dist packages/search/dist
 
-publish-all:
-	cd packages/cache; npm publish
-	cd packages/complete; npm publish
-	cd packages/search; npm publish
-
-.PHONY: clear-dist build-dist publish-all
+.PHONY: install clear-dist build-dist
