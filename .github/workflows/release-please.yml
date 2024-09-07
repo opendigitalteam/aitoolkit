@@ -18,11 +18,11 @@ jobs:
         with:
           token: ${{ secrets.MY_RELEASE_PLEASE_TOKEN }}
     outputs:
-      publish-packages/cache:
+      packages/cache:
         ${{ steps.release.outputs['packages/cache--releases_created'] }}
-      publish-packages/complete:
+      packages/complete:
         ${{ steps.release.outputs['packages/complete--releases_created'] }}
-      publish-packages/search:
+      packages/search:
         ${{ steps.release.outputs['packages/search--releases_created'] }}
 
   publish:
@@ -37,18 +37,14 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-        if:
-          ${{ needs.release-please.outputs[format('publish-{0}',
-          matrix.package)] }}
+        if: ${{ needs.release-please.outputs[matrix.package] }}
 
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
           node-version: 20
           registry-url: "https://registry.npmjs.org"
-        if:
-          ${{ needs.release-please.outputs[format('publish-{0}',
-          matrix.package)] }}
+        if: ${{ needs.release-please.outputs[matrix.package] }}
 
       - name: Publish ${{ matrix.package }}
         env:
@@ -58,6 +54,4 @@ jobs:
           npm install
           npm prepublish
           npm publish
-        if:
-          ${{ needs.release-please.outputs[format('publish-{0}',
-          matrix.package)] }}
+        if: ${{ needs.release-please.outputs[matrix.package] }}
