@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.1](https://github.com/opendigitalteam/aitoolkit/compare/complete-v1.8.0...complete-v1.8.1) (2024-09-12)
+
+
+### Miscellaneous Chores
+
+* release 1.8.1 ([abeff08](https://github.com/opendigitalteam/aitoolkit/commit/abeff0819a0df351b193d9b63187dcbff11d4e57))
+
 ## [1.8.0](https://github.com/opendigitalteam/aitoolkit/compare/complete-v1.7.0...complete-v1.8.0) (2024-09-12)
 
 
