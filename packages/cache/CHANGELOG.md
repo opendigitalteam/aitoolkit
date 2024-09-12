@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.8.0](https://github.com/opendigitalteam/aitoolkit/compare/cache-v1.5.0...cache-v1.8.0) (2024-09-12)
+
+
+### Features
+
+* add expiry to cache ([#19](https://github.com/opendigitalteam/aitoolkit/issues/19)) ([8e65c2a](https://github.com/opendigitalteam/aitoolkit/commit/8e65c2a1338349c9bad1f50b260c4caac641c0d2))
+
+
+### Miscellaneous Chores
+
+* release 1.8.0 ([949c02c](https://github.com/opendigitalteam/aitoolkit/commit/949c02c566f825f8256f709e1c486abeb356ef5c))
+
 ## [1.5.0](https://github.com/opendigitalteam/aitoolkit/compare/cache-v1.7.0...cache-v1.5.0) (2024-09-12)
 
 
