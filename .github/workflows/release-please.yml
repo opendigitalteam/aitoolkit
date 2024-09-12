@@ -32,6 +32,7 @@ jobs:
           - packages/complete
           - packages/search
     steps:
+      - run: echo '${{ toJSON(needs.release-please.outputs) }}'
       - name: Checkout Repository
         uses: actions/checkout@v2
         if: ${{ needs.release-please.outputs[matrix.package] }}
