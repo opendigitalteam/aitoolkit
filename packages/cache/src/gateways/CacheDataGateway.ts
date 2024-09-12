@@ -2,7 +2,12 @@ import { CacheData } from "../domains/CacheData";
 import { CacheRecord, CacheRecordKey } from "../domains/CacheRecord";
 
 export default interface CacheDataGateway {
-  saveCacheData(keyPrefix: string, key: string, data: CacheData): Promise<void>;
+  saveCacheData(
+    keyPrefix: string,
+    key: string,
+    data: CacheData,
+    expiresAt?: number,
+  ): Promise<void>;
 
   getCacheDataByPrefixedKey(
     keyPrefix: string,

@@ -7,6 +7,7 @@ type SaveCacheDataRequest = {
   keyPrefix?: string;
   key: string;
   data: CacheData;
+  expiresAt?: number;
 };
 
 export default async function SaveCacheData(request: SaveCacheDataRequest) {
@@ -14,5 +15,6 @@ export default async function SaveCacheData(request: SaveCacheDataRequest) {
     request.keyPrefix || defaultKeyPrefix,
     request.key,
     request.data,
+    request.expiresAt,
   );
 }
