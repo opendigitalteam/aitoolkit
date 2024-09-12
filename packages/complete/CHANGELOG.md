@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/opendigitalteam/aitoolkit/compare/complete-v1.5.0...complete-v1.6.0) (2024-09-12)
+
+
+### Features
+
+* add support for OpenAI o1 ([#21](https://github.com/opendigitalteam/aitoolkit/issues/21)) ([cefa2df](https://github.com/opendigitalteam/aitoolkit/commit/cefa2df5ab1b5da02a2f9abd98e856f72e0079be))
+
 ## [1.5.0](https://github.com/opendigitalteam/aitoolkit/compare/complete-v1.4.0...complete-v1.5.0) (2024-09-07)
 
 
