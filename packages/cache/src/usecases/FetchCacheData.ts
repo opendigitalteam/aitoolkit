@@ -10,8 +10,12 @@ type FetchCacheDataRequest = {
 export default async function FetchCacheData(
   request: FetchCacheDataRequest,
 ): Promise<CacheRecord | undefined> {
-  return await request.gateway.getCacheDataByPrefixedKey(
+  const dataRecord = await request.gateway.getCacheDataByPrefixedKey(
     request.keyPrefix || defaultKeyPrefix,
     request.key,
   );
+
+  if (!dataRecord?.expiresAt || dataRecord.expiresAt > Date.now()) {
+    return dataRecord;
+  }
 }

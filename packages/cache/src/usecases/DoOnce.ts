@@ -1,6 +1,7 @@
 import { CacheData } from "../domains/CacheData";
 import { defaultKeyPrefix } from "../domains/CacheRecord";
 import CacheDataGateway from "../gateways/CacheDataGateway";
+import FetchCacheData from "./FetchCacheData";
 import SaveCacheData from "./SaveCacheData";
 
 type DoOnceRequest = {
@@ -9,6 +10,7 @@ type DoOnceRequest = {
   key: string;
   validateBeforeSave?: (data: CacheData) => boolean;
   overwrite?: boolean;
+  expiresAt?: number;
 };
 
 type DoOnceResponse =
@@ -30,11 +32,16 @@ export default async function DoOnce(
     key,
     validateBeforeSave,
     overwrite = false,
+    expiresAt,
   }: DoOnceRequest,
   fn: () => Promise<CacheData>,
 ): Promise<DoOnceResponse> {
   if (!overwrite) {
-    const cacheRecord = await gateway.getCacheDataByPrefixedKey(keyPrefix, key);
+    const cacheRecord = await FetchCacheData({
+      gateway,
+      keyPrefix,
+      key,
+    });
 
     if (cacheRecord) {
       return {
@@ -61,6 +68,7 @@ export default async function DoOnce(
       keyPrefix,
       key,
       data: cacheData,
+      expiresAt,
     });
 
     return { ok: true, data: cacheData };

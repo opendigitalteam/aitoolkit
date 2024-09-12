@@ -5,6 +5,7 @@ export const CacheRecord = z.object({
   keyPrefix: z.string(),
   key: z.string(),
   data: CacheData,
+  expiresAt: z.number().optional(),
 });
 export type CacheRecord = z.infer<typeof CacheRecord>;
 

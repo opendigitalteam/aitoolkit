@@ -36,7 +36,12 @@ export default class CacheDataS3Gateway implements CacheDataGateway {
     return this.keyParts(keyPrefix, this.encodeKey(key));
   }
 
-  async saveCacheData(keyPrefix: string, key: string, data: CacheData) {
+  async saveCacheData(
+    keyPrefix: string,
+    key: string,
+    data: CacheData,
+    expiresAt?: number,
+  ) {
     const request = new Upload({
       client: this.client,
       params: {
@@ -47,6 +52,7 @@ export default class CacheDataS3Gateway implements CacheDataGateway {
             keyPrefix,
             key,
             data,
+            expiresAt,
           }),
         ),
       },
