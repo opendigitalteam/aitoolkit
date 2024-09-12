@@ -49,6 +49,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
+          npm install
+          npm run lint
           npm install --workspace=${{ matrix.package }}
           npm run prepublish --workspace=${{ matrix.package }}
           npm publish --workspace=${{ matrix.package }}
