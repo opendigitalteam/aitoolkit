@@ -21,7 +21,7 @@ type ChatCompletionUserTextMessage = {
   name?: string;
 };
 export type ChatCompletionFormat = "json" | "text";
-export type ChatCompletionTradeoff = "speed" | "quality";
+export type ChatCompletionTradeoff = "speed" | "quality" | "reasoning";
 export type ChatCompletionTemperature = "cold" | "cool" | "standard" | "hot";
 export type ChatCompletionValidator<R> = (input: string) => R;
 

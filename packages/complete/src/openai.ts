@@ -11,6 +11,7 @@ import {
 } from "./ChatCompletionGateway";
 
 type OpenAIModel =
+  | "o1-preview-2024-09-12"
   | "gpt-4o-2024-05-13"
   | "gpt-4-turbo-2024-04-09"
   | "gpt-3.5-turbo-0125"
@@ -57,6 +58,9 @@ function mapTradeoffToOpenAIModel(
   switch (tradeoff) {
     case "quality":
       return "gpt-4o-2024-05-13";
+
+    case "reasoning":
+      return "o1-preview-2024-09-12";
 
     case "speed":
     default:
