@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/opendigitalteam/aitoolkit/compare/cache-v1.5.0...cache-v1.6.0) (2024-09-12)
+
+
+### Features
+
+* add expiry to cache ([#19](https://github.com/opendigitalteam/aitoolkit/issues/19)) ([8e65c2a](https://github.com/opendigitalteam/aitoolkit/commit/8e65c2a1338349c9bad1f50b260c4caac641c0d2))
+
 ## [1.5.0](https://github.com/opendigitalteam/aitoolkit/compare/cache-v1.4.0...cache-v1.5.0) (2024-09-07)
 
 
