@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/opendigitalteam/aitoolkit/compare/complete-v1.6.0...complete-v1.7.0) (2024-09-12)
+
+
+### Features
+
+* remove old OpenAI models ([#23](https://github.com/opendigitalteam/aitoolkit/issues/23)) ([5b7d916](https://github.com/opendigitalteam/aitoolkit/commit/5b7d91668f340b71a8352de86878415080dafd8a))
+
 ## [1.6.0](https://github.com/opendigitalteam/aitoolkit/compare/complete-v1.5.0...complete-v1.6.0) (2024-09-12)
 
 
