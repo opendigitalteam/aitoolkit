@@ -19,9 +19,9 @@ jobs:
           token: ${{ secrets.MY_RELEASE_PLEASE_TOKEN }}
       - run: echo '${{ toJSON(steps.release.outputs) }}'
     outputs:
-      packages/cache: ${{ steps.release.outputs['packages/cache--releases_created'] }}
-      packages/complete: ${{ steps.release.outputs['packages/complete--releases_created'] }}
-      packages/search: ${{ steps.release.outputs['packages/search--releases_created'] }}
+      packages/cache: ${{ steps.release.outputs['packages/cache--release_created'] }}
+      packages/complete: ${{ steps.release.outputs['packages/complete--release_created'] }}
+      packages/search: ${{ steps.release.outputs['packages/search--release_created'] }}
 
   publish:
     runs-on: ubuntu-latest
