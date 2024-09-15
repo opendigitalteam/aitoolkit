@@ -7,7 +7,9 @@
   "packages": {
     "packages/cache": {},
     "packages/complete": {},
-    "packages/search": {}
+    "packages/search": {},
+    "packages/enrich": {},
+    "packages/agentic": {}
   },
   "plugins": ["node-workspace"],
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
