@@ -1,5 +1,7 @@
 {
   "packages/cache": "1.8.1",
   "packages/complete": "1.8.1",
-  "packages/search": "1.8.1"
+  "packages/search": "1.8.1",
+  "packages/enrich": "1.8.0",
+  "packages/agentic": "1.8.0"
 }

@@ -3,7 +3,9 @@
   "workspaces": [
     "packages/cache",
     "packages/complete",
-    "packages/search"
+    "packages/search",
+    "packages/agentic",
+    "packages/enrich"
   ],
   "scripts": {
     "prepare": "husky",
