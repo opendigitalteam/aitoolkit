@@ -1,6 +1,6 @@
 {
   "name": "@aitoolkit/cache",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "Cache tools for AI",
   "exports": {
     ".": {
