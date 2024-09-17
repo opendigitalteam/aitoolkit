@@ -18,8 +18,10 @@ jobs:
           token: ${{ secrets.MY_RELEASE_PLEASE_TOKEN }}
       - run: echo '${{ toJSON(steps.release.outputs) }}'
     outputs:
+      packages/agentic: ${{ steps.release.outputs['packages/agentic--release_created'] }}
       packages/cache: ${{ steps.release.outputs['packages/cache--release_created'] }}
       packages/complete: ${{ steps.release.outputs['packages/complete--release_created'] }}
+      packages/enrich: ${{ steps.release.outputs['packages/enrich--release_created'] }}
       packages/search: ${{ steps.release.outputs['packages/search--release_created'] }}
 
   publish:
@@ -28,8 +30,10 @@ jobs:
     strategy:
       matrix:
         package:
+          - packages/agentic
           - packages/cache
           - packages/complete
+          - packages/enrich
           - packages/search
     steps:
       - run: echo '${{ toJSON(needs.release-please.outputs) }}'
