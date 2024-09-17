@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.8.2](https://github.com/opendigitalteam/aitoolkit/compare/enrich-v1.8.1...enrich-v1.8.2) (2024-09-17)
+
+
+### Miscellaneous Chores
+
+* release 1.8.2 ([99534d1](https://github.com/opendigitalteam/aitoolkit/commit/99534d10c1c38d6a8e2e032f5763b80373306fe3))
+* release 1.8.2 ([a2028c4](https://github.com/opendigitalteam/aitoolkit/commit/a2028c471cd9f6ae7110a2fdd6daa166f4a48467))
+
 ## [1.8.1](https://github.com/opendigitalteam/aitoolkit/compare/enrich-v1.8.0...enrich-v1.8.1) (2024-09-17)
 
 
